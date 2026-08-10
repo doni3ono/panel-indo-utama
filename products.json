@@ -78,5 +78,15 @@
     "spec": "",
     "description": "",
     "image": ""
+  },
+  {
+    "id": "kapasitor-bank",
+    "name": "Kapasitor Bank",
+    "price": 0,
+    "stock": "Tersedia",
+    "category": "Lainnya",
+    "spec": "",
+    "description": "",
+    "image": ""
   }
 ]
