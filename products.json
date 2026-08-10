@@ -38,5 +38,15 @@
     "spec": "",
     "description": "",
     "image": ""
+  },
+  {
+    "id": "panel-inverter-vsd",
+    "name": "Panel Inverter (VSD)",
+    "price": 0,
+    "stock": "Tersedia",
+    "category": "Lainnya",
+    "spec": "",
+    "description": "",
+    "image": ""
   }
 ]
