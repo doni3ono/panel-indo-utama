@@ -48,5 +48,15 @@
     "spec": "",
     "description": "",
     "image": ""
+  },
+  {
+    "id": "panel-star-delta",
+    "name": "Panel Star Delta",
+    "price": 0,
+    "stock": "Tersedia",
+    "category": "Lainnya",
+    "spec": "",
+    "description": "",
+    "image": ""
   }
 ]
