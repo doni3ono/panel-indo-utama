@@ -205,8 +205,141 @@ st.markdown("""
     color: var(--text);
 }
 [data-testid="stSidebar"] {
-    background: rgba(5, 12, 22, .95);
-    border-right: 1px solid var(--line);
+    display: none;
+}
+[data-testid="stSidebarCollapsedControl"] {
+    display: none;
+}
+header[data-testid="stHeader"] {
+    background: rgba(5, 12, 22, .82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.block-container {
+    max-width: 1220px;
+    padding-top: 2.3rem;
+    padding-bottom: 3rem;
+}
+.top-brand {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:12px;
+}
+.brand-mark {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:20px;
+    font-weight:850;
+    letter-spacing:.4px;
+    color:#f8fbff;
+}
+.brand-icon {
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:linear-gradient(135deg,#38bdf8,#6366f1);
+    box-shadow:0 8px 28px rgba(56,189,248,.22);
+}
+.nav-wrap {
+    padding:8px 10px 4px 10px;
+    margin-bottom:18px;
+    border-radius:18px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.07);
+}
+div[role="radiogroup"] {
+    gap:4px;
+}
+div[role="radiogroup"] label {
+    background:transparent;
+    border-radius:12px;
+    padding:7px 12px;
+}
+.hero-grid {
+    display:grid;
+    grid-template-columns: 1.35fr .65fr;
+    gap:26px;
+    align-items:center;
+}
+.hero-visual {
+    min-height:310px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.12);
+    background:
+      radial-gradient(circle at 70% 20%, rgba(56,189,248,.28), transparent 24%),
+      radial-gradient(circle at 35% 70%, rgba(99,102,241,.24), transparent 24%),
+      linear-gradient(145deg, rgba(10,25,45,.96), rgba(13,39,65,.88));
+    position:relative;
+    overflow:hidden;
+    box-shadow:inset 0 0 80px rgba(56,189,248,.04);
+}
+.panel-line {
+    position:absolute;
+    left:16%;
+    right:16%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(125,211,252,.8),transparent);
+}
+.panel-line.l1 { top:28%; }
+.panel-line.l2 { top:50%; }
+.panel-line.l3 { top:72%; }
+.panel-node {
+    position:absolute;
+    width:54px;
+    height:54px;
+    border-radius:16px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 0 35px rgba(56,189,248,.10);
+}
+.n1 { left:18%; top:18%; }
+.n2 { right:18%; top:39%; }
+.n3 { left:30%; bottom:14%; }
+.visual-label {
+    position:absolute;
+    right:18px;
+    bottom:18px;
+    padding:9px 12px;
+    border-radius:12px;
+    background:rgba(2,8,23,.55);
+    border:1px solid rgba(255,255,255,.10);
+    color:#bae6fd;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.7px;
+}
+.cta-row {
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+.cta-primary, .cta-secondary {
+    display:inline-block;
+    text-decoration:none !important;
+    padding:11px 16px;
+    border-radius:12px;
+    font-weight:800;
+}
+.cta-primary {
+    background:linear-gradient(135deg,#38bdf8,#6366f1);
+    color:white !important;
+}
+.cta-secondary {
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.12);
+    color:#e5eef9 !important;
+}
+@media (max-width: 850px) {
+    .hero-grid { grid-template-columns:1fr; }
+    .hero-visual { min-height:220px; }
+    .hero-title { font-size:42px !important; }
 }
 .hero {
     position: relative;
@@ -336,37 +469,96 @@ div[data-testid="stButton"] button {
 # =========================================================
 products = load_products()
 
+# Support direct links such as ?page=Products
+try:
+    qp_page = st.query_params.get("page", "")
+    if qp_page in ["Home", "About Us", "Products", "Projects", "Partners & Clients", "Certificates", "Contact Us"]:
+        st.session_state.page = qp_page
+        st.query_params.clear()
+except Exception:
+    pass
+
+
 # =========================================================
-# HEADER
+# TOP BRAND & PUBLIC NAVIGATION
 # =========================================================
 st.markdown("""
-<div class="hero">
-    <div class="eyebrow">⚡ INDO PANEL UTAMA</div>
-    <div class="hero-title">Reliable Electrical Panels.<br>Built for Real Projects.</div>
-    <p class="hero-sub">
-        Solusi panel listrik untuk gedung, industri, fasilitas komersial, data center,
-        perumahan, dan berbagai kebutuhan proyek. Konsultasi spesifikasi dan pemesanan
-        dapat dilakukan langsung melalui WhatsApp.
-    </p>
+<div class="top-brand">
+    <div class="brand-mark">
+        <div class="brand-icon">⚡</div>
+        <div>INDO PANEL UTAMA</div>
+    </div>
+    <div style="color:#8ea0b7;font-size:13px;">Smart Electrical Solutions</div>
 </div>
 """, unsafe_allow_html=True)
 
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
+public_pages = [
+    "Home",
+    "About Us",
+    "Products",
+    "Projects",
+    "Partners & Clients",
+    "Certificates",
+    "Contact Us"
+]
+
+# Admin mode is intentionally excluded from the public navigation.
+if st.session_state.page != "Admin Produk":
+    st.markdown('<div class="nav-wrap">', unsafe_allow_html=True)
+    selected_page = st.radio(
+        "Navigation",
+        public_pages,
+        index=public_pages.index(st.session_state.page) if st.session_state.page in public_pages else 0,
+        horizontal=True,
+        label_visibility="collapsed"
+    )
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    if selected_page != st.session_state.page:
+        st.session_state.page = selected_page
+        st.rerun()
+
+menu = st.session_state.page
+
 # =========================================================
-# MENU
+# HERO — PUBLIC PAGES ONLY
 # =========================================================
-menu = st.sidebar.radio(
-    "Menu",
-    [
-        "Home",
-        "About Us",
-        "Products",
-        "Projects",
-        "Partners & Clients",
-        "Certificates",
-        "Contact Us",
-        "Admin Produk"
-    ]
-)
+if menu != "Admin Produk":
+    wa_quote = urllib.parse.quote(
+        "Halo Indo Panel Utama, saya ingin meminta quotation / konsultasi panel listrik."
+    )
+    st.markdown(f"""
+    <div class="hero">
+        <div class="hero-grid">
+            <div>
+                <div class="eyebrow">⚡ RELIABLE • RESPONSIVE • PROJECT-ORIENTED</div>
+                <div class="hero-title">Panel Listrik untuk Proyek Modern.</div>
+                <p class="hero-sub">
+                    Solusi panel listrik untuk gedung, industri, fasilitas komersial,
+                    data center, perumahan, dan berbagai kebutuhan proyek.
+                </p>
+                <div class="cta-row">
+                    <a class="cta-primary" href="?page=Products">Lihat Produk</a>
+                    <a class="cta-secondary" href="https://wa.me/{WHATSAPP_NUMBER}?text={wa_quote}" target="_blank">
+                        Minta Penawaran
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="panel-line l1"></div>
+                <div class="panel-line l2"></div>
+                <div class="panel-line l3"></div>
+                <div class="panel-node n1"></div>
+                <div class="panel-node n2"></div>
+                <div class="panel-node n3"></div>
+                <div class="visual-label">SMART POWER DISTRIBUTION</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # =========================================================
 # FUNGSI TAMPIL PRODUK
@@ -407,7 +599,7 @@ if menu == "Home":
     st.markdown("""
     <div class="ai-card">
         <div class="ai-badge">COMPANY PROFILE</div>
-        <h2>Engineering Confidence into Every Panel</h2>
+        <h2>Keandalan untuk Setiap Panel</h2>
         <p>
             Indo Panel Utama menghadirkan solusi panel listrik untuk kebutuhan
             industri, gedung, fasilitas komersial, dan proyek. Fokus kami adalah
@@ -442,7 +634,7 @@ if menu == "Home":
             unsafe_allow_html=True
         )
 
-    st.markdown("## Product Categories")
+    st.markdown("## Kategori Produk")
     categories_home = [
         ("⚙️", "Main Distribution Panel", "Distribusi utama untuk gedung dan fasilitas."),
         ("🔌", "Sub Distribution Panel", "Distribusi daya ke area atau beban tertentu."),
@@ -466,13 +658,13 @@ if menu == "Home":
                     unsafe_allow_html=True
                 )
 
-    st.markdown("## Featured Products")
+    st.markdown("## Produk Unggulan")
     cols = st.columns(3)
     for i, product in enumerate(products[:3]):
         with cols[i]:
             show_product_card(product)
 
-    st.markdown("## Project Sectors")
+    st.markdown("## Sektor Proyek")
     project_sectors = [
         "Office & Commercial",
         "Banking",
@@ -495,7 +687,7 @@ if menu == "Home":
     st.markdown("""
     <div class="ai-card">
         <div class="ai-badge">WHY INDO PANEL UTAMA</div>
-        <h2>Professional, Responsive, Project-Oriented</h2>
+        <h2>Profesional, Responsif, dan Berorientasi Proyek</h2>
         <p>
             Kami membantu pelanggan menentukan solusi berdasarkan fungsi, kapasitas,
             lokasi pemasangan, dan kebutuhan proyek. Untuk kebutuhan khusus,
@@ -899,6 +1091,23 @@ elif menu == "Admin Produk":
                     st.rerun()
                 else:
                     st.error(msg)
+
+
+# =========================================================
+# STAFF ACCESS
+# =========================================================
+if menu != "Admin Produk":
+    st.markdown("---")
+    staff_col1, staff_col2 = st.columns([6, 1])
+    with staff_col2:
+        if st.button("🔐 Staff Login", use_container_width=True):
+            st.session_state.page = "Admin Produk"
+            st.rerun()
+else:
+    if st.button("← Kembali ke Website"):
+        st.session_state.page = "Home"
+        st.session_state.admin_logged_in = False
+        st.rerun()
 
 st.markdown(
     '<div class="footer">© 2026 Indo Panel Utama • Electrical Panel Solutions</div>',
