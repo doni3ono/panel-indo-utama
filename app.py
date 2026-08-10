@@ -75,7 +75,7 @@ def slugify(text):
 
 def whatsapp_link(product):
     message = (
-        f"Halo Panel Indo Utama, saya tertarik dengan produk:\n\n"
+        f"Halo Indo Panel Utama, saya tertarik dengan produk:\n\n"
         f"{product['name']}\n"
         f"Harga: {rupiah(product['price'])}\n"
         f"Spesifikasi: {product.get('spec','')}\n\n"
@@ -158,7 +158,7 @@ def load_products():
             pass
     return DEFAULT_PRODUCTS.copy()
 
-def save_products(products, commit_message="Update produk Panel Indo Utama"):
+def save_products(products, commit_message="Update produk Indo Panel Utama"):
     content = json.dumps(products, ensure_ascii=False, indent=2).encode("utf-8")
     return github_put_file("products.json", content, commit_message)
 
@@ -234,9 +234,10 @@ products = load_products()
 # =========================================================
 st.markdown("""
 <div class="hero">
-    <h1>⚡ Panel Indo Utama</h1>
-    <h3>Solusi Panel Listrik untuk Industri, Gedung, dan Usaha Anda</h3>
-    <p>Katalog panel listrik dengan pemesanan mudah melalui WhatsApp.</p>
+    <div style="font-size:18px;font-weight:700;letter-spacing:1.5px;margin-bottom:8px;">INDO PANEL UTAMA</div>
+    <h1 style="font-size:44px;margin:0 0 10px 0;">Solusi Panel Listrik Terpercaya</h1>
+    <h3 style="font-weight:500;margin-top:0;">Untuk Industri, Gedung, Usaha, dan Proyek</h3>
+    <p style="font-size:18px;margin-top:18px;">Temukan kebutuhan panel listrik Anda dan konsultasikan langsung melalui WhatsApp.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -269,10 +270,11 @@ def show_product_card(product):
 # BERANDA
 # =========================================================
 if menu == "Beranda":
-    st.header("Selamat Datang di Panel Indo Utama")
+    st.header("Selamat Datang di Indo Panel Utama")
     st.write(
         "Kami menyediakan berbagai kebutuhan panel listrik untuk industri, "
-        "gedung, fasilitas komersial, dan proyek."
+        "gedung, fasilitas komersial, usaha, dan proyek. "
+        "Pilih produk dari katalog atau hubungi kami untuk kebutuhan panel custom."
     )
 
     c1, c2, c3 = st.columns(3)
@@ -320,9 +322,9 @@ elif menu == "Katalog Produk":
 # TENTANG
 # =========================================================
 elif menu == "Tentang Kami":
-    st.header("Tentang Panel Indo Utama")
+    st.header("Tentang Indo Panel Utama")
     st.write(
-        "Panel Indo Utama menyediakan panel listrik untuk berbagai kebutuhan "
+        "Indo Panel Utama menyediakan panel listrik untuk berbagai kebutuhan "
         "industri, komersial, gedung, dan proyek."
     )
     st.write(
@@ -336,10 +338,10 @@ elif menu == "Tentang Kami":
 elif menu == "Kontak":
     st.header("Hubungi Kami")
     general_message = urllib.parse.quote(
-        "Halo Panel Indo Utama, saya ingin bertanya mengenai produk panel listrik."
+        "Halo Indo Panel Utama, saya ingin bertanya mengenai produk panel listrik."
     )
     st.link_button(
-        "💬 WhatsApp Panel Indo Utama",
+        "💬 WhatsApp Indo Panel Utama",
         f"https://wa.me/{WHATSAPP_NUMBER}?text={general_message}",
         use_container_width=True
     )
@@ -544,6 +546,6 @@ elif menu == "Admin Produk":
                     st.error(msg)
 
 st.markdown(
-    '<div class="footer">© 2026 Panel Indo Utama</div>',
+    '<div class="footer">© 2026 Indo Panel Utama</div>',
     unsafe_allow_html=True
 )
