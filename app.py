@@ -239,7 +239,7 @@ header[data-testid="stHeader"] {
     align-items:center;
     justify-content:space-between;
     gap:20px;
-    margin-bottom:12px;
+    margin-bottom:8px;
 }
 .brand-mark {
     display:flex;
@@ -476,6 +476,10 @@ div[data-testid="stButton"] button {
     border-radius:14px !important;
     font-weight:700 !important;
 }
+
+div[data-testid="stImage"] img {
+    object-fit: contain;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -484,7 +488,6 @@ div[data-testid="stButton"] button {
 # =========================================================
 products = load_products()
 
-LOGO_URI = local_image_data_uri("assets/logo.png")
 
 # Support direct links such as ?page=Products
 try:
@@ -499,28 +502,36 @@ except Exception:
 # =========================================================
 # TOP BRAND & PUBLIC NAVIGATION
 # =========================================================
-if LOGO_URI:
-    st.markdown(
-        f"""
+brand_col1, brand_col2 = st.columns([3, 1])
+
+with brand_col1:
+    logo_path = "assets/logo.png"
+    if Path(logo_path).exists():
+        st.image(logo_path, width=280)
+    else:
+        st.markdown("""
         <div class="top-brand">
             <div class="brand-mark">
-                <img src="{LOGO_URI}" style="height:58px;max-width:320px;object-fit:contain;" />
+                <div class="brand-icon">⚡</div>
+                <div>INDO PANEL UTAMA</div>
             </div>
-            <div style="color:#8ea0b7;font-size:13px;">Solusi Panel Listrik Terpercaya</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+with brand_col2:
+    st.markdown(
+        """
+        <div style="
+            text-align:right;
+            color:#8ea0b7;
+            font-size:13px;
+            padding-top:18px;
+        ">
+            Solusi Panel Listrik Terpercaya
         </div>
         """,
         unsafe_allow_html=True
     )
-else:
-    st.markdown("""
-    <div class="top-brand">
-        <div class="brand-mark">
-            <div class="brand-icon">⚡</div>
-            <div>INDO PANEL UTAMA</div>
-        </div>
-        <div style="color:#8ea0b7;font-size:13px;">Solusi Panel Listrik Terpercaya</div>
-    </div>
-    """, unsafe_allow_html=True)
 
 if "page" not in st.session_state:
     st.session_state.page = "Home"
@@ -535,7 +546,6 @@ public_pages = [
     "Contact Us"
 ]
 
-# Admin mode is intentionally excluded from the public navigation.
 if st.session_state.page != "Admin Produk":
     st.markdown('<div class="nav-wrap">', unsafe_allow_html=True)
     selected_page = st.radio(
