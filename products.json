@@ -88,5 +88,15 @@
     "spec": "",
     "description": "",
     "image": ""
+  },
+  {
+    "id": "panel-hydraulic",
+    "name": "Panel Hydraulic",
+    "price": 0,
+    "stock": "Tersedia",
+    "category": "Lainnya",
+    "spec": "",
+    "description": "",
+    "image": ""
   }
 ]
