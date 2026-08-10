@@ -188,38 +188,145 @@ def upload_product_image(uploaded_file, product_id):
 # =========================================================
 st.markdown("""
 <style>
+:root {
+    --bg: #07111f;
+    --card: rgba(17, 27, 45, 0.72);
+    --line: rgba(255,255,255,.10);
+    --text: #eaf2ff;
+    --muted: #9fb0c6;
+    --accent: #4cc9f0;
+    --accent2: #7c3aed;
+}
+.stApp {
+    background:
+        radial-gradient(circle at 10% 0%, rgba(76,201,240,.10), transparent 30%),
+        radial-gradient(circle at 100% 10%, rgba(124,58,237,.12), transparent 30%),
+        linear-gradient(180deg, #06101c 0%, #0a1423 100%);
+    color: var(--text);
+}
+[data-testid="stSidebar"] {
+    background: rgba(5, 12, 22, .95);
+    border-right: 1px solid var(--line);
+}
 .hero {
-    padding: 34px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #0d47a1, #1976d2);
-    color: white;
-    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    padding: 46px 42px;
+    border-radius: 28px;
+    background:
+        linear-gradient(135deg, rgba(21,101,192,.72), rgba(81,45,168,.60)),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+    border: 1px solid rgba(255,255,255,.14);
+    box-shadow: 0 24px 80px rgba(0,0,0,.28);
+    margin-bottom: 28px;
+    backdrop-filter: blur(18px);
 }
-.hero h1 { margin-bottom: 4px; }
+.hero:after {
+    content: "";
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    right: -90px;
+    top: -90px;
+    background: radial-gradient(circle, rgba(76,201,240,.35), transparent 68%);
+    filter: blur(8px);
+}
+.eyebrow {
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:999px;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.15);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    margin-bottom:16px;
+}
+.hero-title {
+    font-size:50px;
+    line-height:1.06;
+    font-weight:850;
+    margin:0 0 14px 0;
+    max-width:800px;
+}
+.hero-sub {
+    font-size:19px;
+    color:#dbeafe;
+    max-width:760px;
+    margin:0;
+}
+.ai-card {
+    padding:22px;
+    border-radius:20px;
+    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+    border:1px solid var(--line);
+    box-shadow:0 14px 40px rgba(0,0,0,.18);
+    backdrop-filter:blur(14px);
+    margin-bottom:16px;
+}
+.ai-badge {
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(76,201,240,.12);
+    border:1px solid rgba(76,201,240,.35);
+    color:#a5f3fc;
+    margin-bottom:10px;
+}
+.product-shell {
+    padding:16px;
+    border-radius:22px;
+    background:rgba(255,255,255,.045);
+    border:1px solid var(--line);
+    box-shadow:0 12px 32px rgba(0,0,0,.15);
+    min-height:100%;
+}
 .price {
-    font-size: 25px;
-    font-weight: 800;
-    color: #0d47a1;
-    margin-bottom: 5px;
-}
-.card {
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    padding: 14px;
-    min-height: 100%;
+    font-size:26px;
+    font-weight:850;
+    color:#7dd3fc;
+    margin-bottom:6px;
 }
 .placeholder {
-    background: #f3f4f6;
-    border-radius: 12px;
-    padding: 60px 10px;
-    text-align: center;
-    color: #6b7280;
+    background:linear-gradient(135deg, rgba(76,201,240,.08), rgba(124,58,237,.08));
+    border:1px dashed rgba(255,255,255,.18);
+    border-radius:16px;
+    padding:64px 10px;
+    text-align:center;
+    color:var(--muted);
+}
+.kpi {
+    padding:18px;
+    border-radius:18px;
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--line);
+    text-align:center;
+}
+.kpi-value {
+    font-size:27px;
+    font-weight:850;
+    color:#e0f2fe;
+}
+.kpi-label {
+    font-size:13px;
+    color:var(--muted);
 }
 .footer {
     text-align:center;
-    color:#777;
-    padding:25px 0;
-    margin-top:30px;
+    color:#7f8ea3;
+    padding:32px 0 18px 0;
+    margin-top:34px;
+    border-top:1px solid rgba(255,255,255,.06);
+}
+h1,h2,h3 { color:#f8fbff !important; }
+p, .stMarkdown { color:#d6deea; }
+div[data-testid="stLinkButton"] a,
+div[data-testid="stButton"] button {
+    border-radius:14px !important;
+    font-weight:700 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -234,10 +341,12 @@ products = load_products()
 # =========================================================
 st.markdown("""
 <div class="hero">
-    <div style="font-size:18px;font-weight:700;letter-spacing:1.5px;margin-bottom:8px;">INDO PANEL UTAMA</div>
-    <h1 style="font-size:44px;margin:0 0 10px 0;">Solusi Panel Listrik Terpercaya</h1>
-    <h3 style="font-weight:500;margin-top:0;">Untuk Industri, Gedung, Usaha, dan Proyek</h3>
-    <p style="font-size:18px;margin-top:18px;">Temukan kebutuhan panel listrik Anda dan konsultasikan langsung melalui WhatsApp.</p>
+    <div class="eyebrow">⚡ SMART ELECTRICAL SOLUTIONS</div>
+    <div class="hero-title">Indo Panel Utama</div>
+    <p class="hero-sub">
+        Panel listrik modern untuk industri, gedung, usaha, dan proyek.
+        Temukan solusi yang tepat, lihat katalog, dan konsultasikan kebutuhan Anda langsung melalui WhatsApp.
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -253,36 +362,46 @@ menu = st.sidebar.radio(
 # FUNGSI TAMPIL PRODUK
 # =========================================================
 def show_product_card(product):
+    st.markdown('<div class="product-shell">', unsafe_allow_html=True)
     if product.get("image"):
         st.image(product["image"], use_container_width=True)
     else:
         st.markdown('<div class="placeholder">📷 Foto produk belum ditambahkan</div>', unsafe_allow_html=True)
 
+    st.markdown(f'<div class="ai-badge">{product.get("category","Panel")} • {product.get("stock","")}</div>', unsafe_allow_html=True)
     st.subheader(product["name"])
     st.markdown(f'<div class="price">{rupiah(product["price"])}</div>', unsafe_allow_html=True)
-    st.caption(f"{product.get('category','Panel')} • {product.get('stock','')}")
     st.write(product.get("spec", ""))
     if product.get("description"):
         st.write(product["description"])
-    st.link_button("💬 Pesan via WhatsApp", whatsapp_link(product), use_container_width=True)
+    st.link_button("💬 Konsultasi & Pesan", whatsapp_link(product), use_container_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # =========================================================
 # BERANDA
 # =========================================================
 if menu == "Beranda":
-    st.header("Selamat Datang di Indo Panel Utama")
-    st.write(
-        "Kami menyediakan berbagai kebutuhan panel listrik untuk industri, "
-        "gedung, fasilitas komersial, usaha, dan proyek. "
-        "Pilih produk dari katalog atau hubungi kami untuk kebutuhan panel custom."
-    )
+    st.markdown("""
+    <div class="ai-card">
+        <div class="ai-badge">AI-MINDED EXPERIENCE</div>
+        <h3>Smart Panel Finder</h3>
+        <p>
+            Belum yakin panel mana yang dibutuhkan? Gunakan katalog berdasarkan kategori,
+            kapasitas, dan fungsi panel. Untuk kebutuhan custom, konsultasikan spesifikasi Anda
+            langsung melalui WhatsApp.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
     c1, c2, c3 = st.columns(3)
-    c1.metric("Produk", len(products))
-    c2.metric("Pemesanan", "WhatsApp")
-    c3.metric("Layanan", "Custom Panel")
+    with c1:
+        st.markdown(f'<div class="kpi"><div class="kpi-value">{len(products)}</div><div class="kpi-label">Produk Tersedia</div></div>', unsafe_allow_html=True)
+    with c2:
+        st.markdown('<div class="kpi"><div class="kpi-value">Fast</div><div class="kpi-label">Respons via WhatsApp</div></div>', unsafe_allow_html=True)
+    with c3:
+        st.markdown('<div class="kpi"><div class="kpi-value">Custom</div><div class="kpi-label">Panel Sesuai Kebutuhan</div></div>', unsafe_allow_html=True)
 
-    st.subheader("Produk Pilihan")
+    st.markdown("### Produk Unggulan")
     cols = st.columns(3)
     for i, product in enumerate(products[:3]):
         with cols[i]:
@@ -546,6 +665,6 @@ elif menu == "Admin Produk":
                     st.error(msg)
 
 st.markdown(
-    '<div class="footer">© 2026 Indo Panel Utama</div>',
+    '<div class="footer">© 2026 Indo Panel Utama • Smart Electrical Solutions</div>',
     unsafe_allow_html=True
 )
