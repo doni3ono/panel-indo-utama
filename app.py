@@ -5,6 +5,8 @@ import base64
 import json
 import urllib.parse
 import time
+import os
+import base64
 
 st.set_page_config(
     page_title="Indo Panel Utama",
@@ -54,6 +56,18 @@ DEFAULT_PRODUCTS = [
 # =========================================================
 # UTILITAS
 # =========================================================
+
+def local_image_data_uri(path):
+    try:
+        with open(path, "rb") as f:
+            encoded = base64.b64encode(f.read()).decode("utf-8")
+        ext = Path(path).suffix.lower().replace(".", "")
+        mime = "image/png" if ext == "png" else f"image/{ext}"
+        return f"data:{mime};base64,{encoded}"
+    except Exception:
+        return ""
+
+
 def rupiah(value):
     try:
         return f"Rp {int(value):,}".replace(",", ".")
@@ -337,6 +351,7 @@ div[role="radiogroup"] label {
     color:#e5eef9 !important;
 }
 @media (max-width: 850px) {
+    .top-brand img { height:46px !important; max-width:240px !important; }
     .hero-grid { grid-template-columns:1fr; }
     .hero-visual { min-height:220px; }
     .hero-title { font-size:42px !important; }
@@ -469,6 +484,8 @@ div[data-testid="stButton"] button {
 # =========================================================
 products = load_products()
 
+LOGO_URI = local_image_data_uri("assets/logo.png")
+
 # Support direct links such as ?page=Products
 try:
     qp_page = st.query_params.get("page", "")
@@ -482,15 +499,28 @@ except Exception:
 # =========================================================
 # TOP BRAND & PUBLIC NAVIGATION
 # =========================================================
-st.markdown("""
-<div class="top-brand">
-    <div class="brand-mark">
-        <div class="brand-icon">⚡</div>
-        <div>INDO PANEL UTAMA</div>
+if LOGO_URI:
+    st.markdown(
+        f"""
+        <div class="top-brand">
+            <div class="brand-mark">
+                <img src="{LOGO_URI}" style="height:58px;max-width:320px;object-fit:contain;" />
+            </div>
+            <div style="color:#8ea0b7;font-size:13px;">Solusi Panel Listrik Terpercaya</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+else:
+    st.markdown("""
+    <div class="top-brand">
+        <div class="brand-mark">
+            <div class="brand-icon">⚡</div>
+            <div>INDO PANEL UTAMA</div>
+        </div>
+        <div style="color:#8ea0b7;font-size:13px;">Solusi Panel Listrik Terpercaya</div>
     </div>
-    <div style="color:#8ea0b7;font-size:13px;">Smart Electrical Solutions</div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 if "page" not in st.session_state:
     st.session_state.page = "Home"
