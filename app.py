@@ -7,7 +7,7 @@ import urllib.parse
 import time
 
 st.set_page_config(
-    page_title="Panel Indo Utama",
+    page_title="Indo Panel Utama",
     page_icon="⚡",
     layout="wide"
 )
