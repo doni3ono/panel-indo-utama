@@ -21,10 +21,10 @@
   },
   {
     "id": "panel-ats-amf",
-    "name": "Panel ATS-AMF",
+    "name": "Panel Pompa",
     "price": 22500000,
     "stock": "Pre Order",
-    "category": "ATS / AMF",
+    "category": "Lainnya",
     "spec": "Automatic Transfer Switch | AMF | Custom Capacity",
     "description": "Panel otomatis untuk perpindahan sumber listrik PLN dan genset.",
     "image": ""
