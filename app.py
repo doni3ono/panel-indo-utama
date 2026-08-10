@@ -214,7 +214,7 @@ st.markdown("""
     padding: 46px 42px;
     border-radius: 28px;
     background:
-        linear-gradient(135deg, rgba(21,101,192,.72), rgba(81,45,168,.60)),
+        linear-gradient(135deg, rgba(8,72,138,.88), rgba(24,48,86,.90)),
         linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
     border: 1px solid rgba(255,255,255,.14);
     box-shadow: 0 24px 80px rgba(0,0,0,.28);
@@ -244,7 +244,7 @@ st.markdown("""
     margin-bottom:16px;
 }
 .hero-title {
-    font-size:50px;
+    font-size:54px;
     line-height:1.06;
     font-weight:850;
     margin:0 0 14px 0;
@@ -341,11 +341,12 @@ products = load_products()
 # =========================================================
 st.markdown("""
 <div class="hero">
-    <div class="eyebrow">⚡ SMART ELECTRICAL SOLUTIONS</div>
-    <div class="hero-title">Indo Panel Utama</div>
+    <div class="eyebrow">⚡ INDO PANEL UTAMA</div>
+    <div class="hero-title">Reliable Electrical Panels.<br>Built for Real Projects.</div>
     <p class="hero-sub">
-        Panel listrik modern untuk industri, gedung, usaha, dan proyek.
-        Temukan solusi yang tepat, lihat katalog, dan konsultasikan kebutuhan Anda langsung melalui WhatsApp.
+        Solusi panel listrik untuk gedung, industri, fasilitas komersial, data center,
+        perumahan, dan berbagai kebutuhan proyek. Konsultasi spesifikasi dan pemesanan
+        dapat dilakukan langsung melalui WhatsApp.
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -355,7 +356,16 @@ st.markdown("""
 # =========================================================
 menu = st.sidebar.radio(
     "Menu",
-    ["Beranda", "Katalog Produk", "Tentang Kami", "Kontak", "Admin Produk"]
+    [
+        "Home",
+        "About Us",
+        "Products",
+        "Projects",
+        "Partners & Clients",
+        "Certificates",
+        "Contact Us",
+        "Admin Produk"
+    ]
 )
 
 # =========================================================
@@ -366,52 +376,189 @@ def show_product_card(product):
     if product.get("image"):
         st.image(product["image"], use_container_width=True)
     else:
-        st.markdown('<div class="placeholder">📷 Foto produk belum ditambahkan</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="placeholder">📷 Foto produk belum ditambahkan</div>',
+            unsafe_allow_html=True
+        )
 
-    st.markdown(f'<div class="ai-badge">{product.get("category","Panel")} • {product.get("stock","")}</div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="ai-badge">{product.get("category","Panel")} • {product.get("stock","")}</div>',
+        unsafe_allow_html=True
+    )
     st.subheader(product["name"])
-    st.markdown(f'<div class="price">{rupiah(product["price"])}</div>', unsafe_allow_html=True)
+    st.markdown(
+        f'<div class="price">{rupiah(product["price"])}</div>',
+        unsafe_allow_html=True
+    )
     st.write(product.get("spec", ""))
     if product.get("description"):
         st.write(product["description"])
-    st.link_button("💬 Konsultasi & Pesan", whatsapp_link(product), use_container_width=True)
+    st.link_button(
+        "💬 Konsultasi & Pesan",
+        whatsapp_link(product),
+        use_container_width=True
+    )
     st.markdown('</div>', unsafe_allow_html=True)
 
 # =========================================================
-# BERANDA
+# HOME
 # =========================================================
-if menu == "Beranda":
+if menu == "Home":
     st.markdown("""
     <div class="ai-card">
-        <div class="ai-badge">AI-MINDED EXPERIENCE</div>
-        <h3>Smart Panel Finder</h3>
+        <div class="ai-badge">COMPANY PROFILE</div>
+        <h2>Engineering Confidence into Every Panel</h2>
         <p>
-            Belum yakin panel mana yang dibutuhkan? Gunakan katalog berdasarkan kategori,
-            kapasitas, dan fungsi panel. Untuk kebutuhan custom, konsultasikan spesifikasi Anda
-            langsung melalui WhatsApp.
+            Indo Panel Utama menghadirkan solusi panel listrik untuk kebutuhan
+            industri, gedung, fasilitas komersial, dan proyek. Fokus kami adalah
+            kesesuaian spesifikasi, kemudahan konsultasi, dan layanan yang responsif.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        st.markdown(
+            f'<div class="kpi"><div class="kpi-value">{len(products)}</div>'
+            '<div class="kpi-label">Produk Katalog</div></div>',
+            unsafe_allow_html=True
+        )
+    with c2:
+        st.markdown(
+            '<div class="kpi"><div class="kpi-value">Custom</div>'
+            '<div class="kpi-label">Panel by Specification</div></div>',
+            unsafe_allow_html=True
+        )
+    with c3:
+        st.markdown(
+            '<div class="kpi"><div class="kpi-value">Fast</div>'
+            '<div class="kpi-label">WhatsApp Consultation</div></div>',
+            unsafe_allow_html=True
+        )
+    with c4:
+        st.markdown(
+            '<div class="kpi"><div class="kpi-value">Project</div>'
+            '<div class="kpi-label">Industrial & Commercial</div></div>',
+            unsafe_allow_html=True
+        )
+
+    st.markdown("## Product Categories")
+    categories_home = [
+        ("⚙️", "Main Distribution Panel", "Distribusi utama untuk gedung dan fasilitas."),
+        ("🔌", "Sub Distribution Panel", "Distribusi daya ke area atau beban tertentu."),
+        ("🔁", "ATS / AMF Panel", "Perpindahan otomatis PLN dan genset."),
+        ("⚡", "Capacitor Bank", "Membantu optimasi faktor daya."),
+        ("🧠", "Control Panel", "Panel kontrol untuk kebutuhan mesin dan sistem."),
+        ("🛠️", "Custom Panel", "Dibuat sesuai spesifikasi dan kebutuhan proyek.")
+    ]
+    for row_start in range(0, len(categories_home), 3):
+        cols = st.columns(3)
+        for j, (icon, title, desc) in enumerate(categories_home[row_start:row_start+3]):
+            with cols[j]:
+                st.markdown(
+                    f"""
+                    <div class="ai-card" style="min-height:185px;">
+                        <div style="font-size:32px;">{icon}</div>
+                        <h3>{title}</h3>
+                        <p>{desc}</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+
+    st.markdown("## Featured Products")
+    cols = st.columns(3)
+    for i, product in enumerate(products[:3]):
+        with cols[i]:
+            show_product_card(product)
+
+    st.markdown("## Project Sectors")
+    project_sectors = [
+        "Office & Commercial",
+        "Banking",
+        "Hotel & Hospitality",
+        "Healthcare",
+        "Industrial & Data Center",
+        "Residential",
+        "Education & Worship",
+        "Shopping Center",
+        "Transport Facility"
+    ]
+    sector_html = "".join(
+        [f'<span class="ai-badge" style="margin:6px;">{x}</span>' for x in project_sectors]
+    )
+    st.markdown(
+        f'<div class="ai-card">{sector_html}</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown("""
+    <div class="ai-card">
+        <div class="ai-badge">WHY INDO PANEL UTAMA</div>
+        <h2>Professional, Responsive, Project-Oriented</h2>
+        <p>
+            Kami membantu pelanggan menentukan solusi berdasarkan fungsi, kapasitas,
+            lokasi pemasangan, dan kebutuhan proyek. Untuk kebutuhan khusus,
+            kirimkan spesifikasi Anda dan konsultasikan langsung dengan kami.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    general_message = urllib.parse.quote(
+        "Halo Indo Panel Utama, saya ingin konsultasi kebutuhan panel listrik untuk proyek saya."
+    )
+    st.link_button(
+        "💬 Request Quotation via WhatsApp",
+        f"https://wa.me/{WHATSAPP_NUMBER}?text={general_message}",
+        use_container_width=True
+    )
+
+# =========================================================
+# ABOUT
+# =========================================================
+elif menu == "About Us":
+    st.header("About Indo Panel Utama")
+    st.markdown("""
+    <div class="ai-card">
+        <div class="ai-badge">ABOUT COMPANY</div>
+        <h2>Electrical Panel Solutions for Modern Projects</h2>
+        <p>
+            Indo Panel Utama menyediakan panel listrik untuk berbagai kebutuhan
+            industri, komersial, gedung, dan proyek. Kami melayani produk standar
+            maupun custom sesuai spesifikasi pelanggan.
+        </p>
+        <p>
+            Fokus kami adalah menghadirkan solusi yang jelas spesifikasinya,
+            mudah dikonsultasikan, dan relevan dengan kebutuhan lapangan.
         </p>
     </div>
     """, unsafe_allow_html=True)
 
     c1, c2, c3 = st.columns(3)
     with c1:
-        st.markdown(f'<div class="kpi"><div class="kpi-value">{len(products)}</div><div class="kpi-label">Produk Tersedia</div></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="ai-card"><h3>Quality</h3>'
+            '<p>Spesifikasi produk disesuaikan dengan kebutuhan penggunaan.</p></div>',
+            unsafe_allow_html=True
+        )
     with c2:
-        st.markdown('<div class="kpi"><div class="kpi-value">Fast</div><div class="kpi-label">Respons via WhatsApp</div></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="ai-card"><h3>Reliability</h3>'
+            '<p>Fokus pada solusi panel yang andal dan aplikatif.</p></div>',
+            unsafe_allow_html=True
+        )
     with c3:
-        st.markdown('<div class="kpi"><div class="kpi-value">Custom</div><div class="kpi-label">Panel Sesuai Kebutuhan</div></div>', unsafe_allow_html=True)
-
-    st.markdown("### Produk Unggulan")
-    cols = st.columns(3)
-    for i, product in enumerate(products[:3]):
-        with cols[i]:
-            show_product_card(product)
+        st.markdown(
+            '<div class="ai-card"><h3>Service</h3>'
+            '<p>Konsultasi cepat untuk mendukung kebutuhan proyek.</p></div>',
+            unsafe_allow_html=True
+        )
 
 # =========================================================
-# KATALOG
+# PRODUCTS
 # =========================================================
-elif menu == "Katalog Produk":
-    st.header("Katalog Produk")
+elif menu == "Products":
+    st.header("Products")
 
     search = st.text_input("Cari produk", placeholder="Contoh: MDP, SDP, ATS")
     categories = sorted(set([p.get("category", "Lainnya") for p in products]))
@@ -438,26 +585,115 @@ elif menu == "Katalog Produk":
                     show_product_card(product)
 
 # =========================================================
-# TENTANG
+# PROJECTS
 # =========================================================
-elif menu == "Tentang Kami":
-    st.header("Tentang Indo Panel Utama")
-    st.write(
-        "Indo Panel Utama menyediakan panel listrik untuk berbagai kebutuhan "
-        "industri, komersial, gedung, dan proyek."
-    )
-    st.write(
-        "Kami melayani kebutuhan panel standar maupun panel yang dibuat "
-        "berdasarkan spesifikasi pelanggan."
-    )
+elif menu == "Projects":
+    st.header("Projects")
+    st.markdown("""
+    <div class="ai-card">
+        <div class="ai-badge">PROJECT EXPERIENCE</div>
+        <h2>Project Portfolio</h2>
+        <p>
+            Halaman ini disiapkan untuk menampilkan proyek-proyek Indo Panel Utama.
+            Foto, nama proyek, lokasi, jenis panel, dan tahun pengerjaan dapat
+            ditambahkan setelah data proyek tersedia.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    project_groups = [
+        ("🏢", "Office & Commercial"),
+        ("🏭", "Industrial & Data Center"),
+        ("🏨", "Hotel & Hospitality"),
+        ("🏥", "Healthcare"),
+        ("🏠", "Residential"),
+        ("🏬", "Shopping Center"),
+        ("🏫", "Education & Worship"),
+        ("✈️", "Transportation Facility")
+    ]
+    for row_start in range(0, len(project_groups), 2):
+        cols = st.columns(2)
+        for j, (icon, name) in enumerate(project_groups[row_start:row_start+2]):
+            with cols[j]:
+                st.markdown(
+                    f"""
+                    <div class="ai-card">
+                        <div style="font-size:32px;">{icon}</div>
+                        <h3>{name}</h3>
+                        <p>Project portfolio coming soon.</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
 
 # =========================================================
-# KONTAK
+# PARTNERS & CLIENTS
 # =========================================================
-elif menu == "Kontak":
-    st.header("Hubungi Kami")
+elif menu == "Partners & Clients":
+    st.header("Partners & Clients")
+    st.markdown("""
+    <div class="ai-card">
+        <div class="ai-badge">TRUSTED NETWORK</div>
+        <h2>Partners & Clients</h2>
+        <p>
+            Area ini dapat digunakan untuk menampilkan logo partner, supplier,
+            dan klien yang memang memiliki izin untuk ditampilkan secara publik.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    for row_start in range(0, 8, 4):
+        cols = st.columns(4)
+        for j in range(4):
+            with cols[j]:
+                st.markdown(
+                    '<div class="placeholder" style="padding:35px 10px;">CLIENT LOGO</div>',
+                    unsafe_allow_html=True
+                )
+
+# =========================================================
+# CERTIFICATES
+# =========================================================
+elif menu == "Certificates":
+    st.header("Certificates")
+    st.markdown("""
+    <div class="ai-card">
+        <div class="ai-badge">COMPLIANCE & QUALITY</div>
+        <h2>Certificates & Standards</h2>
+        <p>
+            Sertifikat perusahaan, sertifikat produk, atau standar mutu dapat
+            ditampilkan di halaman ini setelah file resmi tersedia.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    cols = st.columns(3)
+    for c in cols:
+        with c:
+            st.markdown(
+                '<div class="placeholder">CERTIFICATE</div>',
+                unsafe_allow_html=True
+            )
+
+# =========================================================
+# CONTACT
+# =========================================================
+elif menu == "Contact Us":
+    st.header("Contact Us")
+    st.markdown("""
+    <div class="ai-card">
+        <div class="ai-badge">REQUEST A QUOTATION</div>
+        <h2>Let’s Discuss Your Panel Requirement</h2>
+        <p>
+            Kirim kebutuhan panel, kapasitas, fungsi, lokasi pemasangan,
+            dan informasi proyek Anda. Kami akan membantu mengarahkan ke solusi
+            yang sesuai.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
     general_message = urllib.parse.quote(
-        "Halo Indo Panel Utama, saya ingin bertanya mengenai produk panel listrik."
+        "Halo Indo Panel Utama, saya ingin meminta quotation / konsultasi panel listrik."
     )
     st.link_button(
         "💬 WhatsApp Indo Panel Utama",
@@ -665,6 +901,6 @@ elif menu == "Admin Produk":
                     st.error(msg)
 
 st.markdown(
-    '<div class="footer">© 2026 Indo Panel Utama • Smart Electrical Solutions</div>',
+    '<div class="footer">© 2026 Indo Panel Utama • Electrical Panel Solutions</div>',
     unsafe_allow_html=True
 )
