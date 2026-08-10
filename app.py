@@ -204,19 +204,19 @@ def upload_product_image(uploaded_file, product_id):
 st.markdown("""
 <style>
 :root {
-    --bg: #07111f;
-    --card: rgba(17, 27, 45, 0.72);
-    --line: rgba(255,255,255,.10);
-    --text: #eaf2ff;
-    --muted: #9fb0c6;
-    --accent: #4cc9f0;
-    --accent2: #7c3aed;
+    --bg: #f5f9ff;
+    --card: rgba(255,255,255,.82);
+    --line: rgba(15,74,130,.12);
+    --text: #12345b;
+    --muted: #60758f;
+    --accent: #1479d1;
+    --accent2: #ff8a00;
 }
 .stApp {
     background:
-        radial-gradient(circle at 10% 0%, rgba(76,201,240,.10), transparent 30%),
-        radial-gradient(circle at 100% 10%, rgba(124,58,237,.12), transparent 30%),
-        linear-gradient(180deg, #06101c 0%, #0a1423 100%);
+        radial-gradient(circle at 8% 4%, rgba(20,121,209,.12), transparent 27%),
+        radial-gradient(circle at 94% 8%, rgba(255,138,0,.10), transparent 24%),
+        linear-gradient(180deg, #fbfdff 0%, #eef6ff 52%, #ffffff 100%);
     color: var(--text);
 }
 [data-testid="stSidebar"] {
@@ -226,9 +226,9 @@ st.markdown("""
     display: none;
 }
 header[data-testid="stHeader"] {
-    background: rgba(5, 12, 22, .82);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255,255,255,.06);
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(15,74,130,.08);
 }
 .block-container {
     max-width: 1220px;
@@ -249,7 +249,7 @@ header[data-testid="stHeader"] {
     font-size:20px;
     font-weight:850;
     letter-spacing:.4px;
-    color:#f8fbff;
+    color:#103b67;
 }
 .brand-icon {
     width:38px;
@@ -258,15 +258,16 @@ header[data-testid="stHeader"] {
     align-items:center;
     justify-content:center;
     border-radius:12px;
-    background:linear-gradient(135deg,#38bdf8,#6366f1);
-    box-shadow:0 8px 28px rgba(56,189,248,.22);
+    background:linear-gradient(135deg,#1479d1,#2ea8ff);
+    box-shadow:0 8px 28px rgba(20,121,209,.20);
 }
 .nav-wrap {
     padding:8px 10px 4px 10px;
     margin-bottom:18px;
     border-radius:18px;
-    background:rgba(255,255,255,.035);
-    border:1px solid rgba(255,255,255,.07);
+    background:rgba(255,255,255,.76);
+    border:1px solid rgba(20,90,150,.10);
+    box-shadow:0 10px 30px rgba(20,74,120,.07);
 }
 div[role="radiogroup"] {
     gap:4px;
@@ -285,11 +286,11 @@ div[role="radiogroup"] label {
 .hero-visual {
     min-height:310px;
     border-radius:24px;
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(20,90,150,.14);
     background:
       radial-gradient(circle at 70% 20%, rgba(56,189,248,.28), transparent 24%),
       radial-gradient(circle at 35% 70%, rgba(99,102,241,.24), transparent 24%),
-      linear-gradient(145deg, rgba(10,25,45,.96), rgba(13,39,65,.88));
+      linear-gradient(145deg, #f8fcff, #ddecfa);
     position:relative;
     overflow:hidden;
     box-shadow:inset 0 0 80px rgba(56,189,248,.04);
@@ -309,8 +310,8 @@ div[role="radiogroup"] label {
     width:54px;
     height:54px;
     border-radius:16px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.14);
+    background:rgba(255,255,255,.78);
+    border:1px solid rgba(20,90,150,.16);
     box-shadow:0 0 35px rgba(56,189,248,.10);
 }
 .n1 { left:18%; top:18%; }
@@ -322,9 +323,9 @@ div[role="radiogroup"] label {
     bottom:18px;
     padding:9px 12px;
     border-radius:12px;
-    background:rgba(2,8,23,.55);
-    border:1px solid rgba(255,255,255,.10);
-    color:#bae6fd;
+    background:rgba(255,255,255,.82);
+    border:1px solid rgba(20,90,150,.12);
+    color:#1265a9;
     font-size:12px;
     font-weight:700;
     letter-spacing:.7px;
@@ -343,12 +344,13 @@ div[role="radiogroup"] label {
     font-weight:800;
 }
 .cta-primary {
-    background:linear-gradient(135deg,#38bdf8,#6366f1);
+    background:linear-gradient(135deg,#ff8a00,#ffad33);
     color:white !important;
+    box-shadow:0 10px 24px rgba(255,138,0,.22);
 }
 .cta-secondary {
     background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.12);
+    border:1px solid rgba(20,90,150,.14);
     color:#e5eef9 !important;
 }
 @media (max-width: 850px) {
@@ -363,10 +365,10 @@ div[role="radiogroup"] label {
     padding: 46px 42px;
     border-radius: 28px;
     background:
-        linear-gradient(135deg, rgba(8,72,138,.88), rgba(24,48,86,.90)),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
-    border: 1px solid rgba(255,255,255,.14);
-    box-shadow: 0 24px 80px rgba(0,0,0,.28);
+        linear-gradient(125deg, #0e65b5 0%, #238dd5 58%, #41b6df 100%),
+        linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.42);
+    box-shadow: 0 24px 70px rgba(20,94,160,.20);
     margin-bottom: 28px;
     backdrop-filter: blur(18px);
 }
@@ -401,16 +403,16 @@ div[role="radiogroup"] label {
 }
 .hero-sub {
     font-size:19px;
-    color:#dbeafe;
+    color:#f4fbff;
     max-width:760px;
     margin:0;
 }
 .ai-card {
     padding:22px;
     border-radius:20px;
-    background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+    background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(245,250,255,.90));
     border:1px solid var(--line);
-    box-shadow:0 14px 40px rgba(0,0,0,.18);
+    box-shadow:0 14px 38px rgba(30,88,140,.09);
     backdrop-filter:blur(14px);
     margin-bottom:16px;
 }
@@ -420,28 +422,28 @@ div[role="radiogroup"] label {
     font-weight:700;
     padding:6px 10px;
     border-radius:999px;
-    background:rgba(76,201,240,.12);
-    border:1px solid rgba(76,201,240,.35);
-    color:#a5f3fc;
+    background:rgba(20,121,209,.08);
+    border:1px solid rgba(20,121,209,.20);
+    color:#1265a9;
     margin-bottom:10px;
 }
 .product-shell {
     padding:16px;
     border-radius:22px;
-    background:rgba(255,255,255,.045);
+    background:rgba(255,255,255,.94);
     border:1px solid var(--line);
-    box-shadow:0 12px 32px rgba(0,0,0,.15);
+    box-shadow:0 12px 32px rgba(30,88,140,.09);
     min-height:100%;
 }
 .price {
     font-size:26px;
     font-weight:850;
-    color:#7dd3fc;
+    color:#0e6dbb;
     margin-bottom:6px;
 }
 .placeholder {
-    background:linear-gradient(135deg, rgba(76,201,240,.08), rgba(124,58,237,.08));
-    border:1px dashed rgba(255,255,255,.18);
+    background:linear-gradient(135deg, rgba(20,121,209,.06), rgba(255,138,0,.05));
+    border:1px dashed rgba(20,90,150,.20);
     border-radius:16px;
     padding:64px 10px;
     text-align:center;
@@ -450,14 +452,15 @@ div[role="radiogroup"] label {
 .kpi {
     padding:18px;
     border-radius:18px;
-    background:rgba(255,255,255,.04);
+    background:rgba(255,255,255,.88);
     border:1px solid var(--line);
+    box-shadow:0 10px 28px rgba(30,88,140,.07);
     text-align:center;
 }
 .kpi-value {
     font-size:27px;
     font-weight:850;
-    color:#e0f2fe;
+    color:#0e5f9f;
 }
 .kpi-label {
     font-size:13px;
@@ -465,13 +468,13 @@ div[role="radiogroup"] label {
 }
 .footer {
     text-align:center;
-    color:#7f8ea3;
+    color:#71849a;
     padding:32px 0 18px 0;
     margin-top:34px;
     border-top:1px solid rgba(255,255,255,.06);
 }
-h1,h2,h3 { color:#f8fbff !important; }
-p, .stMarkdown { color:#d6deea; }
+h1,h2,h3 { color:#123d68 !important; }
+p, .stMarkdown { color:#3f5872; }
 div[data-testid="stLinkButton"] a,
 div[data-testid="stButton"] button {
     border-radius:14px !important;
@@ -480,6 +483,17 @@ div[data-testid="stButton"] button {
 
 div[data-testid="stImage"] img {
     object-fit: contain;
+}
+
+div[role="radiogroup"] label p {
+    color:#294c70 !important;
+    font-weight:650;
+}
+div[role="radiogroup"] label:hover {
+    background:rgba(20,121,209,.06);
+}
+.footer {
+    border-top:1px solid rgba(20,90,150,.08) !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -524,7 +538,7 @@ with brand_col2:
         """
         <div style="
             text-align:right;
-            color:#8ea0b7;
+            color:#60758f;
             font-size:13px;
             padding-top:18px;
         ">
