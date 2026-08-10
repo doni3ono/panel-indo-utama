@@ -1,0 +1,42 @@
+[
+  {
+    "id": "panel-mdp-400a",
+    "name": "Panel MDP 400A",
+    "price": 18500000,
+    "stock": "Tersedia",
+    "category": "MDP",
+    "spec": "Main Breaker 400A | 380/400V | Indoor",
+    "description": "Panel distribusi utama untuk kebutuhan gedung dan industri.",
+    "image": ""
+  },
+  {
+    "id": "panel-sdp-250a",
+    "name": "Panel SDP 250A",
+    "price": 12500000,
+    "stock": "Tersedia",
+    "category": "SDP",
+    "spec": "Main Breaker 250A | 380/400V | Indoor",
+    "description": "Sub Distribution Panel untuk distribusi daya.",
+    "image": ""
+  },
+  {
+    "id": "panel-ats-amf",
+    "name": "Panel ATS-AMF",
+    "price": 22500000,
+    "stock": "Pre Order",
+    "category": "ATS / AMF",
+    "spec": "Automatic Transfer Switch | AMF | Custom Capacity",
+    "description": "Panel otomatis untuk perpindahan sumber listrik PLN dan genset.",
+    "image": ""
+  },
+  {
+    "id": "panel-mvmdb",
+    "name": "Panel MVMDB",
+    "price": 0,
+    "stock": "Tersedia",
+    "category": "Lainnya",
+    "spec": "",
+    "description": "",
+    "image": ""
+  }
+]
