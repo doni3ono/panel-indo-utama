@@ -1,12 +1,12 @@
 [
   {
     "id": "panel-mdp-400a",
-    "name": "Panel MDP 400A",
+    "name": "Panel LVMDP",
     "price": 18500000,
     "stock": "Tersedia",
-    "category": "MDP",
-    "spec": "Main Breaker 400A | 380/400V | Indoor",
-    "description": "Panel distribusi utama untuk kebutuhan gedung dan industri.",
+    "category": "Lainnya",
+    "spec": "",
+    "description": "",
     "image": ""
   },
   {
