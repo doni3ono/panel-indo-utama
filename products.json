@@ -98,5 +98,15 @@
     "spec": "",
     "description": "",
     "image": ""
+  },
+  {
+    "id": "panel-synchrone",
+    "name": "Panel Synchrone",
+    "price": 0,
+    "stock": "Tersedia",
+    "category": "Lainnya",
+    "spec": "",
+    "description": "",
+    "image": ""
   }
 ]
